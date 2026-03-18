@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Transporter Dashboard</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>Transporter</h2>
+
+<a href="#">Dashboard</a>
+<a href="#">Assigned Shipments</a>
+<a href="#">Update Status</a>
+<a href="#">Location</a>
+<a href="#">Completed Deliveries</a>
+
+</div>
+
+
+<div class="main">
+
+<h1>Assigned Shipments</h1>
+
+<table>
+
+<tr>
+<th>Order ID</th>
+<th>Crop</th>
+<th>Pickup</th>
+<th>Delivery</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>FCX001</td>
+<td>Wheat</td>
+<td>Indore</td>
+<td>Bhopal</td>
+<td id="status">Assigned</td>
+<td>
+<button onclick="updateStatus()">Update</button>
+</td>
+</tr>
+
+</table>
+
+</div>
+
+<script src="js/script.js"></script>
+
+<a href="tracking.html">
+<button>Track Shipment</button>
+</a>
+
+</body>
+</html>

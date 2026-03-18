@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmChainX - Add Crop</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Add Crop Details</h1>
+
+<form id="cropForm">
+
+<div class="form-group">
+<label for="cropName">Crop Name</label>
+<input type="text" id="cropName" placeholder="Enter crop name" required>
+</div>
+
+<div class="form-group">
+<label for="quantity">Quantity (Kg)</label>
+<input type="number" id="quantity" placeholder="Enter quantity" required>
+</div>
+
+<div class="form-group">
+<label for="price">Price per Kg (₹)</label>
+<input type="number" id="price" placeholder="Enter price" required>
+</div>
+
+<div class="form-group">
+<label for="location">Farm Location</label>
+<input type="text" id="location" placeholder="Enter farm location" required>
+</div>
+
+<div class="form-group">
+<label for="harvestDate">Harvest Date</label>
+<input type="date" id="harvestDate" required>
+</div>
+
+<div class="form-group">
+<!--<label for="cropImage">Upload Crop Image</label>
+<input type="file" id="cropImage">
+-->
+</div>
+
+<button type="submit">Add Crop</button>
+
+</form>
+
+<!-- Success Message -->
+<p id="message"></p>
+
+<!-- QR Code Section -->
+<div class="qr-section">
+
+<h2>Generated QR Code</h2>
+
+<div id="qrcode"></div>
+
+<p class="note">Scan this QR to verify crop details</p>
+
+</div>
+
+<!-- Back Button -->
+<div class="back-btn">
+<button onclick="window.location.href='farmerdashboard.html'">
+Back to Dashboard
+</button>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="js/addcrop.js"></script>
+<script>
+document.getElementById("cropForm").addEventListener("submit", function(e) {
+
+e.preventDefault();
+
+const crop = {
+cropName: document.getElementById("cropName").value,
+quantity: document.getElementById("quantity").value,
+price: document.getElementById("price").value,
+location: document.getElementById("location").value,
+harvestDate: document.getElementById("harvestDate").value
+};
+
+fetch("http://localhost:8080/api/crops", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify(crop)
+})
+.then(response => response.json())
+.then(data => {
+document.getElementById("message").innerText = "Crop added successfully!";
+})
+.catch(error => {
+console.error(error);
+document.getElementById("message").innerText = "Error adding crop.";
+});
+
+});
+</script>
+</body>
+</html>

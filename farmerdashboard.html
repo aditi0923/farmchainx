@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmchainX Farmer Dashboard</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+<nav class="navbar">
+
+<h2 class="logo">FarmchainX</h2>
+
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="#">Dashboard</a></li>
+<li><a href="#">My Products</a></li>
+</ul>
+
+<div class="auth-buttons">
+<a href="index.html" class="btn login">Logout</a>
+</div>
+
+</nav>
+</header>
+
+
+<section class="dashboard">
+
+<h1>Farmer Dashboard</h1>
+<p>Welcome back! Manage your agricultural products here.</p>
+
+
+<div class="dashboard-cards">
+
+<div class="card">
+<h3>Total Products</h3>
+<p>12</p>
+</div>
+
+<div class="card">
+<h3>Orders Received</h3>
+<p>8</p>
+</div>
+
+<div class="card">
+<h3>Total Earnings</h3>
+<p>₹15,000</p>
+</div>
+
+</div>
+
+
+<div class="product-section">
+
+<h2>My Products</h2>
+
+<button onclick="location.href='add-crop.html'" class="addCropBtn">
+Add Crop
+</button>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Product</th>
+<th>Quantity</th>
+<th>Price</th>
+<th>Location</th>
+</tr>
+</thead>
+
+<tbody id="tableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<script>
+
+function loadCrops(){
+
+fetch("http://localhost:8080/api/crops")
+
+.then(response => response.json())
+
+.then(data => {
+
+let table = document.getElementById("tableBody");
+table.innerHTML = "";
+
+data.forEach(crop => {
+
+let row = `
+<tr>
+<td>${crop.id}</td>
+<td>${crop.cropName}</td>
+<td>${crop.quantity} kg</td>
+<td>₹${crop.price}</td>
+<td>${crop.location}</td>
+</tr>
+`;
+
+table.innerHTML += row;
+
+});
+
+});
+
+}
+
+loadCrops();
+
+</script>
+</body>
+</html>

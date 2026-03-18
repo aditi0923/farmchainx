@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmchainX Login</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+<nav class="navbar">
+<h2 class="logo">FarmchainX</h2>
+
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">How it works</a></li>
+</ul>
+
+<div class="auth-buttons">
+<a href="login.html" class="btn login">Login</a>
+<a href="signup.html" class="btn register">Register</a>
+</div>
+
+</nav>
+</header>
+
+<section class="form-section">
+
+<div class="form-container">
+
+<h2>Login to FarmchainX</h2>
+
+<form onsubmit="loginRedirect(event)">
+
+<label>Email</label>
+<input type="email" placeholder="Enter email" required>
+
+<label>Password</label>
+<input type="password" placeholder="Enter password" required>
+
+<button type="submit" class="primary-btn">Login</button>
+
+<p class="forgot">Forgot Password?</p>
+
+<p>Don't have an account? <a href="signup.html">Register Now</a></p>
+
+</form>
+
+</div>
+
+</section>
+
+<script>
+
+function loginRedirect(event){
+
+event.preventDefault();
+
+let email = document.querySelector("input[type='email']").value;
+
+/* Simple demo logic */
+
+if(email.includes("farmer")){
+window.location.href = "farmerdashboard.html";
+}
+
+else if(email.includes("consumer")){
+window.location.href = "consumer.html";
+}
+
+else if(email.includes("transporter")){
+window.location.href = "transporter.html";
+}
+
+else{
+window.location.href = "admin.html";
+}
+
+}
+
+</script>
+
+</body>
+</html>

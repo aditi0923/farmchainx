@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>FarmChainX Admin</h2>
+
+<a href="#">Dashboard</a>
+<a href="#">Manage Farmers</a>
+<a href="#">Manage Consumers</a>
+<a href="#">Manage Transporters</a>
+<a href="#">Crop Listings</a>
+<a href="#">Orders</a>
+<a href="#">Reports</a>
+<a href="#">Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1>Admin Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Farmers</h3>
+<p id="farmers">120</p>
+</div>
+
+<div class="card">
+<h3>Total Consumers</h3>
+<p id="consumers">85</p>
+</div>
+
+<div class="card">
+<h3>Total Orders</h3>
+<p id="orders">340</p>
+</div>
+
+<div class="card">
+<h3>Active Shipments</h3>
+<p id="shipments">56</p>
+</div>
+
+</div>
+
+<h2>Recent Orders</h2>
+
+<table>
+
+<tr>
+<th>Order ID</th>
+<th>Crop</th>
+<th>Farmer</th>
+<th>Consumer</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>FCX101</td>
+<td>Tomatoes</td>
+<td>Rahul</td>
+<td>Sneha</td>
+<td id="status1">Pending</td>
+</tr>
+
+<tr>
+<td>FCX102</td>
+<td>Wheat</td>
+<td>Vishnu</td>
+<td>Ananya</td>
+<td id="status2">Shipped</td>
+</tr>
+
+</table>
+
+<button onclick="refreshData()">Refresh Data</button>
+
+</div>
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>
