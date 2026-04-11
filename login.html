@@ -41,6 +41,14 @@
 <label>Password</label>
 <input type="password" placeholder="Enter password" required>
 
+<label>Select Role</label>
+
+<select id="role">
+<option value="farmer">🌱 Farmer</option>
+<option value="consumer">🛒 Consumer</option>
+<option value="transporter">🚚 Transporter</option>
+</select>
+
 <button type="submit" class="primary-btn">Login</button>
 
 <p class="forgot">Forgot Password?</p>
@@ -53,35 +61,7 @@
 
 </section>
 
-<script>
-
-function loginRedirect(event){
-
-event.preventDefault();
-
-let email = document.querySelector("input[type='email']").value;
-
-/* Simple demo logic */
-
-if(email.includes("farmer")){
-window.location.href = "farmerdashboard.html";
-}
-
-else if(email.includes("consumer")){
-window.location.href = "consumer.html";
-}
-
-else if(email.includes("transporter")){
-window.location.href = "transporter.html";
-}
-
-else{
-window.location.href = "admin.html";
-}
-
-}
-
-</script>
+<script src="js/auth.js"></script>
 
 </body>
 </html>

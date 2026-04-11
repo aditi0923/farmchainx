@@ -79,36 +79,6 @@ Back to Dashboard
 
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script src="js/addcrop.js"></script>
-<script>
-document.getElementById("cropForm").addEventListener("submit", function(e) {
 
-e.preventDefault();
-
-const crop = {
-cropName: document.getElementById("cropName").value,
-quantity: document.getElementById("quantity").value,
-price: document.getElementById("price").value,
-location: document.getElementById("location").value,
-harvestDate: document.getElementById("harvestDate").value
-};
-
-fetch("http://localhost:8080/api/crops", {
-method: "POST",
-headers: {
-"Content-Type": "application/json"
-},
-body: JSON.stringify(crop)
-})
-.then(response => response.json())
-.then(data => {
-document.getElementById("message").innerText = "Crop added successfully!";
-})
-.catch(error => {
-console.error(error);
-document.getElementById("message").innerText = "Error adding crop.";
-});
-
-});
-</script>
 </body>
 </html>

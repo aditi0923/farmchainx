@@ -4,121 +4,413 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FarmchainX Farmer Dashboard</title>
-<link rel="stylesheet" href="styles.css">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+/* Layout */
+.main-container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: #1b5e20;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover {
+    background: #2e7d32;
+}
+
+/* Content */
+.content {
+    margin-left: 240px;
+    padding: 30px;
+    width: calc(100% - 240px);
+}
+
+/* Topbar */
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#profileIcon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #2e7d32;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: #e8f5e9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Table */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+button {
+    background: green;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-right: 5px;
+}
+
+.section {
+    margin-top: 20px;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-<nav class="navbar">
+<div class="main-container">
 
-<h2 class="logo">FarmchainX</h2>
-
-<ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="#">Dashboard</a></li>
-<li><a href="#">My Products</a></li>
-</ul>
-
-<div class="auth-buttons">
-<a href="index.html" class="btn login">Logout</a>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>FarmchainX</h2>
+    <ul>
+        <li onclick="showSection('dashboard')">🏠 Dashboard</li>
+        <li onclick="showSection('crops')">🌾 Crop Details</li>
+        <li onclick="showSection('orders')">📦 Orders</li>
+        <li onclick="showSection('tracking')">🚚 Tracking</li>
+        <li onclick="logout()">🚪 Logout</li>
+    </ul>
 </div>
 
-</nav>
-</header>
+<!-- CONTENT -->
+<div class="content">
 
+    <!-- TOP RIGHT PROFILE -->
+    <div class="topbar">
+        <span id="userEmail"></span>
+        <div id="profileIcon">U</div>
+    </div>
 
-<section class="dashboard">
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="section">
+        <h1>Farmer Dashboard</h1>
 
-<h1>Farmer Dashboard</h1>
-<p>Welcome back! Manage your agricultural products here.</p>
+        <div class="cards">
+            <div class="card">Total Products<br> <span id="productCount">0</span></div>
+            <div class="card">Orders<br>8</div>
+            <div class="card">Earnings<br>₹15,000</div>
+        </div>
+    </div>
 
+    <!-- CROPS -->
+    <div id="crops" class="section" style="display:none;">
+        <h2>My Products</h2>
 
-<div class="dashboard-cards">
+        <button onclick="location.href='add-crop.html'">
+            Add Crop +
+        </button>
 
-<div class="card">
-<h3>Total Products</h3>
-<p>12</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- ORDERS -->
+    <div id="orders" class="section" style="display:none;">
+    <h2>Orders</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Consumer</th>
+                <th>Status</th>
+                <th>Assign</th>
+            </tr>
+        </thead>
+
+        <tbody id="ordersTable"></tbody>
+    </table>
 </div>
 
-<div class="card">
-<h3>Orders Received</h3>
-<p>8</p>
+    <!-- TRACKING -->
+    <div id="tracking" class="section" style="display:none;">
+    <h2>Tracking</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+
+        <tbody id="trackingTable"></tbody>
+    </table>
 </div>
 
-<div class="card">
-<h3>Total Earnings</h3>
-<p>₹15,000</p>
 </div>
-
 </div>
-
-
-<div class="product-section">
-
-<h2>My Products</h2>
-
-<button onclick="location.href='add-crop.html'" class="addCropBtn">
-Add Crop
-</button>
-
-<table>
-
-<thead>
-<tr>
-<th>ID</th>
-<th>Product</th>
-<th>Quantity</th>
-<th>Price</th>
-<th>Location</th>
-</tr>
-</thead>
-
-<tbody id="tableBody">
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
 
 <script>
 
-function loadCrops(){
+// ✅ CHECK LOGIN
+let email = localStorage.getItem("email");
 
-fetch("http://localhost:8080/api/crops")
-
-.then(response => response.json())
-
-.then(data => {
-
-let table = document.getElementById("tableBody");
-table.innerHTML = "";
-
-data.forEach(crop => {
-
-let row = `
-<tr>
-<td>${crop.id}</td>
-<td>${crop.cropName}</td>
-<td>${crop.quantity} kg</td>
-<td>₹${crop.price}</td>
-<td>${crop.location}</td>
-</tr>
-`;
-
-table.innerHTML += row;
-
-});
-
-});
-
+if (!email) {
+    window.location.href = "login.html";
 }
 
-loadCrops();
+// ✅ SHOW PROFILE
+document.getElementById("userEmail").innerText = email;
+document.getElementById("profileIcon").innerText =
+    email.charAt(0).toUpperCase();
+
+// ✅ LOAD CROPS (USER-WISE)
+function loadCrops() {
+
+    let table = document.getElementById("tableBody");
+
+    // ✅ show loading BEFORE fetch
+    table.innerHTML = "<tr><td colspan='6'>Loading...</td></tr>";
+
+    fetch(`http://localhost:8080/api/crops/user/${email}`)
+    .then(res => res.json())
+    .then(data => {
+
+        // ✅ safety check
+        if (!Array.isArray(data)) {
+            console.error("Backend error:", data);
+            table.innerHTML = "<tr><td colspan='6'>Error loading data</td></tr>";
+            return;
+        }
+
+        // ✅ clear table
+        table.innerHTML = "";
+
+        // ✅ update count
+        document.getElementById("productCount").innerText = data.length;
+
+        // ✅ empty state
+        if(data.length === 0){
+            table.innerHTML = `<tr><td colspan="6">No crops added yet</td></tr>`;
+            return;
+        }
+
+        // ✅ render rows
+        data.forEach(crop => {
+            table.innerHTML += `
+            <tr id="row-${crop.id}">
+                <td>${crop.id}</td>
+                <td>${crop.cropName}</td>
+                <td>${crop.quantity} kg</td>
+                <td>₹${crop.price}</td>
+                <td>${crop.location}</td>
+                <td>
+                    <button onclick="editCrop(${crop.id})">Edit</button>
+                    <button onclick="deleteCrop(${crop.id})">Delete</button>
+                </td>
+            </tr>
+            `;
+        });
+
+    })
+    .catch(err => {
+        console.error(err);
+        table.innerHTML = "<tr><td colspan='6'>Server error</td></tr>";
+    });
+}
+
+function editCrop(id){
+    window.location.href = `edit-crop.html?id=${id}`;
+}
+
+function deleteCrop(id) {
+    fetch(`http://localhost:8080/api/crops/${id}`, {
+        method: "DELETE"
+    })
+    .then(res => {
+    if (!res.ok) throw new Error("Delete failed");
+
+    alert("Crop deleted successfully ✅");
+
+    loadCrops(); // reload table
+})
+    .catch(() => alert("Error deleting crop"));
+}
+
+function loadOrders() {
+    fetch(`http://localhost:8080/api/orders/farmer/${email}`)
+    .then(res => res.json())
+    .then(data => {
+
+        let table = document.getElementById("ordersTable");
+        table.innerHTML = "";
+
+        if (data.length === 0) {
+            table.innerHTML = "<tr><td colspan='6'>No orders yet</td></tr>";
+            return;
+        }
+
+        data.forEach(order => {
+            table.innerHTML += `
+            <tr>
+                <td>${order.id}</td>
+                <td>${order.productName}</td>
+                <td>${order.quantity}</td>
+                <td>${order.consumerEmail}</td>
+                <td>${order.status}</td>
+                <td>
+                    <button onclick="assignTransporter(${order.id})">
+                        Assign
+                    </button>
+                </td>
+            </tr>
+            `;
+        });
+    });
+}
+
+function assignTransporter(orderId) {
+
+    let transporterEmail = prompt("Enter transporter email:");
+
+    fetch(`http://localhost:8080/api/orders/${orderId}/assign-transporter`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            transporterEmail: transporterEmail
+        })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error();
+        alert("Transporter Assigned ✅");
+        loadOrders();
+    })
+    .catch(() => alert("Failed ❌"));
+}
+
+function loadTracking() {
+
+    fetch(`http://localhost:8080/api/orders/farmer/${email}`)
+    .then(res => res.json())
+    .then(orders => {
+
+        let table = document.getElementById("trackingTable");
+        table.innerHTML = "";
+
+        orders.forEach(order => {
+
+            fetch(`http://localhost:8080/api/tracking/${order.id}`)
+            .then(res => res.json())
+            .then(track => {
+
+                table.innerHTML += `
+                <tr>
+                    <td>${order.id}</td>
+                    <td>${track.status}</td>
+                    <td>${track.updatedAt}</td>
+                </tr>
+                `;
+            });
+        });
+    });
+}
+
+// ✅ SWITCH SECTIONS
+function showSection(id) {
+    document.querySelectorAll(".section").forEach(sec => {
+        sec.style.display = "none";
+    });
+
+    document.getElementById(id).style.display = "block";
+
+    if (id === "crops") {
+        loadCrops();
+    }
+    else if (id === "orders") {
+        loadOrders();
+    }
+    else if (id === "tracking") {
+        loadTracking();
+    }
+}
+
+// ✅ LOGOUT
+function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
+// INIT
+showSection("dashboard");
 
 </script>
+
 </body>
 </html>

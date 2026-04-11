@@ -12,17 +12,41 @@
 
 <h1>Blockchain Crop Traceability</h1>
 
-<p><b>Order ID:</b> FCX101</p>
-<p><b>Crop:</b> Tomatoes</p>
-<p><b>Farmer:</b> Rahul</p>
-<p><b>Harvest Date:</b> 10 March 2026</p>
-<p><b>Location:</b> Indore Farm</p>
-<p><b>Transporter:</b> AgriMove Logistics</p>
-<p><b>Status:</b> Delivered</p>
+<p><b>Order ID:</b> <span id="orderId"></span></p>
+<p><b>Crop:</b> <span id="cropName"></span></p>
+<p><b>Harvest Date:</b> <span id="harvestDate"></span></p>
+<p><b>Location:</b> <span id="location"></span></p>
+<p><b>Quantity:</b> <span id="quantity"></span></p>
+<p><b>Price:</b> ₹<span id="price"></span></p>
 
 <h2 class="verified">Blockchain Verified ✔</h2>
 
 </div>
+<a href="tracking.html?id=${id}">View Full Tracking →</a>
+<script>
+
+// ✅ Get ID from URL
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+// ✅ Call backend
+fetch(`http://localhost:8080/api/crops/${id}`)
+.then(res => res.json())
+.then(crop => {
+
+  document.getElementById("orderId").innerText = "FCX" + crop.id;
+  document.getElementById("cropName").innerText = crop.cropName;
+  document.getElementById("harvestDate").innerText = crop.harvestDate;
+  document.getElementById("location").innerText = crop.location;
+  document.getElementById("quantity").innerText = crop.quantity + " kg";
+  document.getElementById("price").innerText = crop.price;
+
+})
+.catch(err => {
+  console.error(err);
+});
+
+</script>
 
 </body>
 </html>

@@ -51,10 +51,9 @@
 <label>Select Role</label>
 
 <select id="role">
-<option>Farmer</option>
-<option>Consumer</option>
-<option>Transporter</option>
-<option>Admin</option>
+<option value="farmer">🌱 Farmer</option>
+<option value="consumer">🛒 Consumer</option>
+<option value="transporter">🚚 Transporter</option>
 </select>
 
 <button type="submit" class="primary-btn">Signup</button>
@@ -67,32 +66,6 @@
 
 </section>
 
-<script>
-
-function redirectDashboard(event){
-
-event.preventDefault();
-
-let role = document.getElementById("role").value;
-
-if(role === "Farmer"){
-window.location.href = "farmerdashboard.html";
-}
-
-else if(role === "Consumer"){
-window.location.href = "consumer.html";
-}
-
-else if(role === "Transporter"){
-window.location.href = "transporter.html";
-}
-
-else{
-window.location.href = "admin.html";
-}
-
-}
-
-</script>
+<script src="js/auth.js"></script>
 </body>
 </html>
