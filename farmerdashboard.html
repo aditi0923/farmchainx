@@ -144,7 +144,7 @@ button {
     <div id="dashboard" class="section">
         <h1>Farmer Dashboard</h1>
 
-        <div class="cards">
+        <div class="cards" style="margin-top:20px;">
             <div class="card">Total Products<br> <span id="productCount">0</span></div>
             <div class="card">Orders<br>8</div>
             <div class="card">Earnings<br>₹15,000</div>
@@ -319,10 +319,15 @@ function loadOrders() {
             table.innerHTML += `
             <tr>
                 <td>${order.id}</td>
-                <td>${order.productName}</td>
+                <td>${order.cropId}</td>
                 <td>${order.quantity}</td>
                 <td>${order.consumerEmail}</td>
-                <td>${order.status}</td>
+                <td style="
+color:${order.status === 'Delivered' ? 'green' :
+        order.status === 'In Transit' ? 'purple' :
+        order.status === 'Assigned' ? 'blue' : 'orange'}">
+    ${order.status}
+</td>
                 <td>
                     <button onclick="assignTransporter(${order.id})">
                         Assign
@@ -338,14 +343,8 @@ function assignTransporter(orderId) {
 
     let transporterEmail = prompt("Enter transporter email:");
 
-    fetch(`http://localhost:8080/api/orders/${orderId}/assign-transporter`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            transporterEmail: transporterEmail
-        })
+    fetch(`http://localhost:8080/api/orders/${orderId}/assign?transporterEmail=${transporterEmail}`, {
+        method: "PUT"
     })
     .then(res => {
         if (!res.ok) throw new Error();
@@ -359,31 +358,31 @@ function loadTracking() {
 
     fetch(`http://localhost:8080/api/orders/farmer/${email}`)
     .then(res => res.json())
-    .then(orders => {
+    .then(data => {
 
         let table = document.getElementById("trackingTable");
         table.innerHTML = "";
 
-        orders.forEach(order => {
+        if(data.length === 0){
+            table.innerHTML = "<tr><td colspan='3'>No tracking data</td></tr>";
+            return;
+        }
 
-            fetch(`http://localhost:8080/api/tracking/${order.id}`)
-            .then(res => res.json())
-            .then(track => {
-
-                table.innerHTML += `
-                <tr>
-                    <td>${order.id}</td>
-                    <td>${track.status}</td>
-                    <td>${track.updatedAt}</td>
-                </tr>
-                `;
-            });
+        data.forEach(order => {
+            table.innerHTML += `
+            <tr>
+                <td>${order.id}</td>
+                <td>${order.status}</td>
+                <td>--</td>
+            </tr>
+            `;
         });
     });
 }
 
 // ✅ SWITCH SECTIONS
 function showSection(id) {
+
     document.querySelectorAll(".section").forEach(sec => {
         sec.style.display = "none";
     });

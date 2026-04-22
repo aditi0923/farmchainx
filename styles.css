@@ -106,6 +106,8 @@ padding:12px 28px;
 font-size:16px;
 border-radius:8px;
 cursor:pointer;
+background: linear-gradient(90deg, #1e88e5, #1565c0);
+
 }
 
 .secondary{
@@ -535,7 +537,7 @@ border-color:#2e7d32;
 /* Button */
 
 button{
-width:100%;
+width:50%;
 padding:12px;
 background:#2e7d32;
 color:white;
@@ -570,9 +572,109 @@ cursor:pointer;
 
 .feature-btn:hover{
 background:#1b5e20;
+width: 50%;
+height: 50%;
 }
 
 #qrcode {
   margin-top: 20px;
   text-align: center;
+}
+
+/* ========================= */
+/* 🔵 MODERN DASHBOARD THEME */
+/* ========================= */
+
+:root {
+    --primary-blue: #1e88e5;
+    --dark-blue: #1565c0;
+    --light-blue: #e3f2fd;
+    --text-dark: #333;
+}
+
+/* Sidebar Upgrade */
+.sidebar {
+    background: linear-gradient(180deg, #1e88e5, #1565c0);
+    color: white;
+}
+
+.sidebar ul li:hover {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+}
+
+/* Cards Upgrade */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.product-section button {
+    background: linear-gradient(90deg, #1e88e5, #1565c0);
+}
+
+/* Tables */
+table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th {
+    background: linear-gradient(90deg, #1e88e5, #1565c0);
+    color: white;
+    font-weight: 600;
+}
+
+td {
+    background: white;
+}
+
+tr:hover td {
+    background: #f1f8ff;
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(90deg, #1e88e5, #1565c0);
+    border: none;
+    color: white;
+    border-radius: 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Navbar Upgrade */
+.navbar {
+    background: linear-gradient(90deg, #1e88e5, #1565c0);
+}
+
+/* Forms */
+.form-container {
+    border-radius: 12px;
+}
+
+/* Dashboard spacing */
+.dashboard, .content {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+tr {
+    transition: 0.2s;
 }

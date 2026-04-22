@@ -57,40 +57,102 @@
 <h2>Available Farm Products</h2>
 
 <table>
-
+<thead>
 <tr>
+<th>ID</th>
 <th>Product</th>
-<th>Farmer</th>
 <th>Price</th>
-<th>Buy</th>
+<th>Action</th>
 </tr>
+</thead>
 
-<tr>
-<td>Wheat</td>
-<td>Ramesh Kumar</td>
-<td>₹2200</td>
-<td><button class="primary-btn">Buy</button></td>
-</tr>
 
-<tr>
-<td>Rice</td>
-<td>Suresh Patel</td>
-<td>₹3000</td>
-<td><button class="primary-btn">Buy</button></td>
-</tr>
-
-<tr>
-<td>Tomato</td>
-<td>Mahesh Singh</td>
-<td>₹1200</td>
-<td><button class="primary-btn">Buy</button></td>
-</tr>
-
+<tbody id="productTable"></tbody>
 </table>
 
 </div>
 
 </section>
+
+<script>
+
+let email = localStorage.getItem("email");
+
+if(!email){
+    window.location.href = "login.html";
+}
+
+// LOAD PRODUCTS
+function loadProducts() {
+
+    fetch("http://localhost:8080/api/crops")
+    .then(res => res.json())
+    .then(data => {
+
+        let table = document.getElementById("productTable");
+        table.innerHTML = "";
+
+        if(data.length === 0){
+            table.innerHTML = "<tr><td colspan='4'>No products available</td></tr>";
+            return;
+        }
+
+        data.forEach(crop => {
+            table.innerHTML += `
+            <tr>
+                <td>${crop.id}</td>
+                <td>${crop.cropName}</td>
+                <td>₹${crop.price}</td>
+                <td>
+                    <button onclick="buyProduct(${crop.id})"> Buy
+                    </button>
+                </td>
+            </tr>
+            `;
+        });
+
+    })
+    .catch(() => {
+        alert("Error loading products ❌");
+    });
+}
+
+function buyProduct(id){
+
+    let quantity = prompt("Enter quantity:");
+
+    if(!quantity) return;
+    
+    alert(`
+    Payment Successful 💳
+    Order placed!
+    Product ID: ${id}
+    Quantity: ${quantity}
+     `);
+    fetch("http://localhost:8080/api/orders", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            cropId: id,
+            quantity: quantity,
+            consumerEmail: localStorage.getItem("email")
+        })
+    })
+    .then(res => res.json())
+    .then(() => {
+        alert("Order placed successfully ✅");
+    })
+    .catch(() => {
+        alert("Error placing order ❌");
+    });
+}
+
+// INIT
+loadProducts();
+
+</script>
 
 </body>
 </html>

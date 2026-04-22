@@ -4,39 +4,157 @@
 <head>
 <title>Shipment Tracking</title>
 <link rel="stylesheet" href="styles.css">
+
+<style>
+.timeline {
+    margin: 30px;
+    padding-left: 20px;
+    border-left: 3px solid #4CAF50;
+}
+
+.step {
+    margin-bottom: 20px;
+}
+
+.step span {
+    font-weight: bold;
+}
+
+.active {
+    color: green;
+}
+</style>
+
 </head>
 
 <body>
 
 <h1>Shipment Tracking</h1>
 
-<table>
-
+<table border="1">
+<thead>
 <tr>
 <th>Order ID</th>
-<th>Crop</th>
-<th>Farmer</th>
-<th>Location</th>
 <th>Status</th>
-<th>Trace</th>
+<th>Track</th>
 </tr>
+</thead>
 
-<tr>
-<td>FCX101</td>
-<td>Tomatoes</td>
-<td>Rahul</td>
-<td>Indore</td>
-<td id="status">In Transit</td>
-
-<td>
-<button onclick="goToTrace()">View Trace</button>
-<a href="js/script.js"></a>
-</a>
-</td>
-
-</tr>
-
+<tbody id="trackingTable"></tbody>
 </table>
+
+<h2>Tracking Timeline</h2>
+
+<div class="timeline">
+    <div class="step" id="step1">🟡 <span>Pending</span></div>
+    <div class="step" id="step2">🔵 <span>Assigned</span></div>
+    <div class="step" id="step3">🟣 <span>In Transit</span></div>
+    <div class="step" id="step4">🟢 <span>Delivered</span></div>
+</div>
+
+<script>
+
+// GET ORDER ID FROM URL
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+// LOAD TRACKING DATA
+function loadTracking(){
+
+    fetch(`http://localhost:8080/api/orders`)
+    .then(res => res.json())
+    .then(data => {
+
+        let order = data.find(o => o.id == id);
+
+        if(!order){
+            alert("Order not found ❌");
+            return;
+        }
+
+        // Show in table (ONLY ONE ROW)
+        let table = document.getElementById("trackingTable");
+
+        table.innerHTML = `
+        <tr>
+            <td>${order.id}</td>
+            <td>${order.status}</td>
+            <td>
+                <button onclick="showOrder(${order.id}, '${order.status}')">Trace</button>
+            </td>
+        </tr>
+        `;
+
+        // 🔥 Automatically update timeline
+        showTimeline(order.status);
+
+    });
+}
+
+// SHOW TIMELINE
+function showTimeline(status){
+
+    // reset
+    document.getElementById("step1").classList.remove("active");
+    document.getElementById("step2").classList.remove("active");
+    document.getElementById("step3").classList.remove("active");
+    document.getElementById("step4").classList.remove("active");
+
+    if(status === "Pending"){
+        document.getElementById("step1").classList.add("active");
+    }
+
+    if(status === "Assigned"){
+        document.getElementById("step1").classList.add("active");
+        document.getElementById("step2").classList.add("active");
+    }
+
+    if(status === "In Transit"){
+        document.getElementById("step1").classList.add("active");
+        document.getElementById("step2").classList.add("active");
+        document.getElementById("step3").classList.add("active");
+    }
+
+    if(status === "Delivered"){
+        document.getElementById("step1").classList.add("active");
+        document.getElementById("step2").classList.add("active");
+        document.getElementById("step3").classList.add("active");
+        document.getElementById("step4").classList.add("active");
+    }
+}
+
+// AUTO REFRESH (LIVE)
+setInterval(() => {
+    if(id){
+        loadTracking();
+    }
+}, 5000);
+
+// INITIAL LOAD
+loadTracking();
+
+function goToTracking(id){
+    window.location.href = `tracking.html?id=${id}`;
+}
+
+
+function showOrder(id, status){
+
+    // update URL (so you can track current order)
+    window.history.pushState({}, "", `?id=${id}`);
+
+    // update timeline
+    showTimeline(status);
+}
+
+if(id){
+    fetch(`http://localhost:8080/api/orders/${id}`)
+    .then(res => res.json())
+    .then(order => {
+        showTimeline(order.status);
+    });
+}
+</script>
 
 </body>
 </html>
