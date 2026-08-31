@@ -2,22 +2,152 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
-<title>Blockchain Traceability</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="styles.css">
-<body>
-    <h1>Blockchain Traceability</h1>
+<title>FarmchainX - Blockchain Traceability</title>
 
-<input type="text" placeholder="Enter Order ID">
+<link rel="stylesheet" href="../../css/styles.css">
 
-<button>Track Product</button>
-
-<ul>
-<li>Harvested at Indore Farm</li>
-<li>Stored in Warehouse</li>
-<li>Transported to Bhopal</li>
-<li>Delivered to Consumer</li>
-</ul>
-</body>
 </head>
+
+<body>
+
+<header>
+
+<nav class="navbar">
+
+<h2 class="logo">FarmchainX</h2>
+
+<ul class="nav-links">
+
+<li>
+<a href="../../index.html">Home</a>
+</li>
+
+<li>
+<a href="../consumer/consumer.html">Dashboard</a>
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+
+<section class="dashboard">
+
+<h1>Blockchain Traceability</h1>
+
+<p>
+Track the complete journey of your agricultural product.
+</p>
+
+
+<div class="form-container">
+
+<label for="orderId">
+Enter Order ID
+</label>
+
+<input
+type="number"
+id="orderId"
+placeholder="Enter Order ID"
+>
+
+
+<button
+class="primary-btn"
+onclick="trackProduct()">
+
+Track Product
+
+</button>
+
+</div>
+
+
+<div id="result" style="margin-top:30px;">
+
+</div>
+
+</section>
+
+
+<script>
+
+function trackProduct() {
+
+    const id =
+        document.getElementById("orderId").value;
+
+    if (!id) {
+
+        alert("Please enter Order ID");
+
+        return;
+    }
+
+
+    fetch(`http://localhost:8080/api/orders/${id}`)
+
+    .then(res => {
+
+        if (!res.ok) {
+            throw new Error("Order not found");
+        }
+
+        return res.json();
+
+    })
+
+    .then(order => {
+
+        document.getElementById("result").innerHTML = `
+
+            <h2>Product Traceability</h2>
+
+            <p>
+                <strong>Order ID:</strong>
+                ${order.id}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                ${order.status}
+            </p>
+
+            <ul>
+
+                <li>🌱 Product harvested</li>
+
+                <li>📦 Product stored</li>
+
+                <li>🚚 Product transported</li>
+
+                <li>🛒 Product delivered</li>
+
+            </ul>
+
+        `;
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById("result").innerHTML =
+            "<p>Product not found ❌</p>";
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FarmchainX Payment</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(to right,#f0fdfa,#ecfeff);
+}
+
+/* Container */
+
+.payment-container{
+    width:420px;
+    text-align: center;
+    margin:60px auto;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    animation:fadeIn 0.5s ease;
+}
+
+/* Heading */
+
+.payment-container h1{
+    text-align:center;
+    color:#0f766e;
+    margin-bottom:10px;
+}
+
+.payment-container p{
+    text-align:center;
+    color:#64748b;
+    margin-bottom:30px;
+}
+
+/* Amount */
+
+.amount-box{
+    background:#f0fdfa;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.amount-box h2{
+    color:#115e59;
+    font-size:32px;
+}
+
+/* Payment Options */
+
+.payment-methods{
+    display:flex;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.method{
+    flex:1;
+    border:2px solid #dbeafe;
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.method:hover{
+    border-color:#0f766e;
+    background:#f0fdfa;
+}
+
+.active-method{
+    border-color:#0f766e;
+    background:#f0fdfa;
+}
+
+/* Form */
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.form-group input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:15px;
+}
+
+/* Pay Button */
+
+.pay-btn{
+    width:50%;
+    display: block;
+    margin:20px auto 0;
+    padding:13px;
+    background:linear-gradient(90deg,#0f766e,#115e59);
+    color:white;
+    border:none;
+    border-radius:14px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.pay-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* Secure */
+
+.secure{
+    text-align:center;
+    margin-top:15px;
+    color:#64748b;
+    font-size:14px;
+}
+
+/* Animation */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="payment-container">
+
+<h1>Secure Payment</h1>
+<p>Complete your FarmchainX order payment</p>
+
+<div class="amount-box">
+    <span>Total Amount</span>
+    <h2 id="amount">₹0</h2>
+</div>
+
+<div class="payment-methods">
+
+    <div class="method active-method">
+        💳 Card
+    </div>
+
+    <div class="method">
+        📱 UPI
+    </div>
+
+    <div class="method">
+        🏦 NetBanking
+    </div>
+
+</div>
+
+<!-- CARD FORM -->
+
+<div id="cardForm">
+
+<div class="form-group">
+<label>Card Holder Name</label>
+<input type="text" placeholder="Enter name">
+</div>
+
+<div class="form-group">
+<label>Card Number</label>
+<input type="text" placeholder="1234 5678 9012 3456">
+</div>
+
+<div style="display:flex; gap:15px;">
+
+<div class="form-group" style="flex:1;">
+<label>Expiry</label>
+<input type="text" placeholder="MM/YY">
+</div>
+
+<div class="form-group" style="flex:1;">
+<label>CVV</label>
+<input type="password" placeholder="***">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- UPI FORM -->
+
+<div id="upiForm" style="display:none;">
+
+<div class="form-group">
+<label>UPI ID</label>
+<input type="text" placeholder="example@upi">
+</div>
+
+<div style="text-align:center; margin-top:20px;">
+
+<img
+src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=FarmchainXPayment"
+width="180">
+
+<p style="margin-top:10px;">
+Scan QR using any UPI app
+</p>
+
+</div>
+
+</div>
+
+<!-- NET BANKING -->
+
+<div id="bankForm" style="display:none;">
+
+<div class="form-group">
+<label>Select Bank</label>
+
+<select style="
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;">
+
+<option>SBI Bank</option>
+<option>HDFC Bank</option>
+<option>ICICI Bank</option>
+<option>Axis Bank</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+<label>Net Banking User ID</label>
+<input type="text" placeholder="Enter User ID">
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input type="password" placeholder="Enter Password">
+</div>
+
+<div class="form-group">
+<label>Transaction PIN</label>
+<input type="password" placeholder="Enter PIN">
+</div>
+
+</div>
+
+
+<button onclick="makePayment(event)" class="pay-btn">
+Pay Securely
+</button>
+
+
+<div class="secure">
+🔒 100% Secure Blockchain Verified Payment
+</div>
+
+</div>
+
+<script>
+
+let email = localStorage.getItem("email");
+
+if (!email) {
+    window.location.href = "../../login.html";
+}
+
+// GET AMOUNT FROM URL
+const params = new URLSearchParams(window.location.search);
+
+const amount = params.get("amount");
+
+document.getElementById("amount").innerText =
+    "₹" + amount;
+
+// PAYMENT
+function makePayment(event){
+
+    event.preventDefault();
+
+    // GET STORED ORDER
+    const orderData = JSON.parse(
+        localStorage.getItem("pendingOrder")
+    );
+
+    console.log(orderData);
+
+    // SAVE ORDER TO BACKEND
+    fetch("http://localhost:8080/api/orders",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify(orderData)
+
+    })
+
+    .then(res => {
+
+        if(!res.ok){
+            throw new Error("Order failed");
+        }
+
+        return res.json();
+    })
+
+    .then(data => {
+
+        alert(`
+Payment Successful ✅
+
+Order Placed Successfully 🌱
+        `);
+
+        // clear pending order
+        localStorage.removeItem("pendingOrder");
+
+        // redirect
+        window.location.href =
+    "consumer.html?payment=success";
+    })
+
+    .catch(err => {
+
+        console.error(err);
+
+        alert("Order placement failed ❌");
+    });
+}
+
+// PAYMENT METHOD SWITCH
+
+const methods = document.querySelectorAll(".method");
+
+const cardForm = document.getElementById("cardForm");
+const upiForm = document.getElementById("upiForm");
+const bankForm = document.getElementById("bankForm");
+
+methods.forEach((method, index) => {
+
+    method.addEventListener("click", () => {
+
+        methods.forEach(m =>
+            m.classList.remove("active-method")
+        );
+
+        method.classList.add("active-method");
+
+        // hide all forms
+        cardForm.style.display = "none";
+        upiForm.style.display = "none";
+        bankForm.style.display = "none";
+
+        // show selected
+        if(index === 0){
+            cardForm.style.display = "block";
+        }
+
+        else if(index === 1){
+            upiForm.style.display = "block";
+        }
+
+        else{
+            bankForm.style.display = "block";
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

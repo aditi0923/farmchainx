@@ -106,7 +106,7 @@ padding:12px 28px;
 font-size:16px;
 border-radius:8px;
 cursor:pointer;
-background: linear-gradient(90deg, #1e88e5, #1565c0);
+background: linear-gradient(90deg, #0f766e , #115e59);
 
 }
 
@@ -537,7 +537,7 @@ border-color:#2e7d32;
 /* Button */
 
 button{
-width:50%;
+width:70%;
 padding:12px;
 background:#2e7d32;
 color:white;
@@ -586,15 +586,15 @@ height: 50%;
 /* ========================= */
 
 :root {
-    --primary-blue: #1e88e5;
-    --dark-blue: #1565c0;
+    --primary-blue: #0f766e;
+    --dark-blue: #115e59;
     --light-blue: #e3f2fd;
     --text-dark: #333;
 }
 
 /* Sidebar Upgrade */
 .sidebar {
-    background: linear-gradient(180deg, #1e88e5, #1565c0);
+    background: linear-gradient(180deg, #0f766e, #115e59);
     color: white;
 }
 
@@ -617,7 +617,7 @@ height: 50%;
 }
 
 .product-section button {
-    background: linear-gradient(90deg, #1e88e5, #1565c0);
+    background: linear-gradient(90deg, #0f766e, #115e59);
 }
 
 /* Tables */
@@ -627,7 +627,7 @@ table {
 }
 
 th {
-    background: linear-gradient(90deg, #1e88e5, #1565c0);
+    background: linear-gradient(90deg, #0f766e, #115e59);
     color: white;
     font-weight: 600;
 }
@@ -642,7 +642,7 @@ tr:hover td {
 
 /* Buttons */
 button {
-    background: linear-gradient(90deg, #1e88e5, #1565c0);
+    background: linear-gradient(90deg, #0f766e, #115e59);
     border: none;
     color: white;
     border-radius: 6px;
@@ -657,7 +657,7 @@ button:hover {
 
 /* Navbar Upgrade */
 .navbar {
-    background: linear-gradient(90deg, #1e88e5, #1565c0);
+    background: linear-gradient(90deg, #0f766e, #115e59);
 }
 
 /* Forms */
@@ -676,5 +676,409 @@ button:hover {
 }
 
 tr {
-    transition: 0.2s;
+    transition: 0.3s ease;
+transform: translateY(-5px);
+}
+/* ================================= */
+/* 🚀 MODERN PREMIUM UI UPGRADE */
+/* ================================= */
+
+:root{
+    --primary:#0f766e;
+    --secondary:#115e59;
+    --light:#ecfeff;
+    --dark:#0f172a;
+    --success:#22c55e;
+    --shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* Smooth Website */
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:linear-gradient(to bottom right,#f5f9ff,#eef4ff);
+    color:#1e293b;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    background:linear-gradient(90deg,#0f766e,#115e59);
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    letter-spacing:1px;
+}
+
+.nav-links a{
+    position:relative;
+    transition:0.3s;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0%;
+    height:2px;
+    background:white;
+    transition:0.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+/* ================= HERO ================= */
+
+.hero h1{
+    background:linear-gradient(90deg,#115e59,#14b8a6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-size:56px;
+    font-weight:800;
+}
+
+.hero p{
+    font-size:20px;
+    color:#475569;
+}
+
+/* ================= BUTTONS ================= */
+
+button,
+.primary,
+.primary-btn{
+    background:linear-gradient(90deg,#0f766e,#115e59);
+    border:none;
+    border-radius:10px;
+    transition:0.3s ease;
+    box-shadow:0 4px 10px rgba(30,136,229,0.3);
+}
+
+button:hover,
+.primary:hover,
+.primary-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(30,136,229,0.25);
+}
+
+.secondary{
+    background:white;
+    color:#115e59;
+    border:2px solid #115e59;
+}
+
+/* ================= FEATURE CARDS ================= */
+
+.feature-card{
+    border-radius:18px;
+    transition:0.35s ease;
+    overflow:hidden;
+    position:relative;
+}
+
+.feature-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.12);
+}
+
+.feature-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(90deg,#0f766e,#14b8a6);
+}
+
+/* ================= DASHBOARD CARDS ================= */
+
+.card{
+    border-radius:18px;
+    background:white;
+    box-shadow:var(--shadow);
+    transition:0.35s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(90deg,#0f766e,#14b8a6);
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.02);
+}
+
+.card h3{
+    color:#115e59;
+    margin-bottom:10px;
+}
+
+/* ================= TABLES ================= */
+
+table{
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    border:none;
+}
+
+th{
+    background:linear-gradient(90deg,#0f766e,#115e59);
+    color:white;
+    font-size:15px;
+    letter-spacing:0.5px;
+}
+
+td{
+    transition:0.2s;
+}
+
+tr:hover td{
+    background:#eef6ff;
+}
+
+/* ================= STATUS BADGES ================= */
+
+.status{
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+    display:inline-block;
+}
+
+.pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.assigned{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.transit{
+    background:#f3e8ff;
+    color:#7e22ce;
+}
+
+.delivered{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    background:linear-gradient(180deg,#115e59,#0f172a);
+    box-shadow:4px 0 15px rgba(0,0,0,0.1);
+}
+
+.sidebar ul li{
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.sidebar ul li:hover{
+    background:rgba(255,255,255,0.15);
+    transform:translateX(5px);
+}
+
+/* ================= FORMS ================= */
+
+.form-container,
+.container,
+.trace-box{
+    border-radius:20px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    animation:fadeIn 0.6s ease;
+}
+
+/* Inputs */
+input,
+select{
+    transition:0.3s;
+}
+
+input:focus,
+select:focus{
+    border-color:#0f766e;
+    box-shadow:0 0 0 4px rgba(30,136,229,0.15);
+}
+
+/* ================= STATS ================= */
+
+.stat-box{
+    transition:0.3s;
+}
+
+.stat-box:hover{
+    transform:translateY(-5px);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:linear-gradient(90deg,#115e59,#0f172a);
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.dashboard,
+.content,
+.feature-card,
+.card,
+table{
+    animation:fadeIn 0.5s ease;
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#0f766e;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#e2e8f0;
+}
+/* ================= ABOUT SECTION ================= */
+
+.about-section{
+    padding:80px 8%;
+}
+
+.about-container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+    flex-wrap:wrap;
+}
+
+.about-text{
+    flex:1;
+}
+
+.about-text h2{
+    font-size:42px;
+    color:#115e59;
+    margin-bottom:20px;
+}
+
+.about-text p{
+    font-size:18px;
+    line-height:1.8;
+    color:#475569;
+    margin-bottom:15px;
+}
+
+.about-image{
+    flex:1;
+}
+
+.about-image img{
+    width:100%;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* ================= WORKFLOW ================= */
+
+.workflow-section{
+    padding:90px 8%;
+    background:#f0fdfa;
+    text-align:center;
+}
+
+.workflow-section h2{
+    font-size:42px;
+    color:#115e59;
+    margin-bottom:50px;
+}
+
+.workflow-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:25px;
+}
+
+.workflow-card{
+    background:white;
+    padding:35px 25px;
+    border-radius:20px;
+    transition:0.35s;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.workflow-card:hover{
+    transform:translateY(-10px);
+}
+
+.workflow-card .icon{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.workflow-card h3{
+    color:#0f766e;
+    margin-bottom:15px;
+}
+
+.workflow-card p{
+    color:#64748b;
+    line-height:1.6;
+}
+
+.method{
+    flex:1;
+    border:2px solid #dbeafe;
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s ease;
+    background:white;
+}
+
+.method:hover{
+    transform:translateY(-3px);
+}
+
+.active-method{
+    border-color:#0f766e;
+    background:#dff7f4;
+    box-shadow:0 5px 15px rgba(15,118,110,0.15);
 }

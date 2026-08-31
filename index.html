@@ -1,119 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FarmchainX</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<link rel="stylesheet" href="styles.css"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmchainX</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
 </head>
 
 <body>
 
-<!-- Navbar -->
+<!-- ================= NAVBAR ================= -->
 
 <header>
-<nav class="navbar">
 
-<h2 class="logo">FarmchainX</h2>
+    <nav class="navbar">
 
-<ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="#">About</a></li>
-<li><a href="#">How it works</a></li>
-</ul>
+        <h2 class="logo">FarmchainX</h2>
 
-<div class="auth-buttons">
-<a href="login.html" class="btn login">Login</a>
-<a href="signup.html" class="btn register">Register</a>
-</div>
+        <ul class="nav-links">
 
-</nav>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+
+            <li>
+                <a href="#about">About</a>
+            </li>
+
+            <li>
+                <a href="#workflow">How it works</a>
+            </li>
+
+        </ul>
+
+        <div class="auth-buttons">
+
+            <a href="login.html" class="btn login">
+                Login
+            </a>
+
+            <a href="signup.html" class="btn register">
+                Register
+            </a>
+
+        </div>
+
+    </nav>
+
 </header>
 
 
-<!-- Hero Section -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
-<h1>AI Powered Transparent <br> Agricultural Marketplace</h1>
+    <h1>
+        AI Powered Transparent
+        <br>
+        Agricultural Marketplace
+    </h1>
 
-<p>Connecting farmers and consumers using AI and Blockchain technology</p>
+    <p>
+        Connecting farmers and consumers using AI and Blockchain technology
+    </p>
 
-<div class="hero-buttons">
-<button class="primary">Get Started</button>
-<button class="secondary">Explore Products</button>
-</div>
+    <div class="hero-buttons">
+
+        <a href="signup.html">
+            <button class="primary">
+                Get Started
+            </button>
+        </a>
+
+        <a href="pages/consumer/consumer.html">
+            <button class="secondary">
+                Explore Products
+            </button>
+        </a>
+
+    </div>
 
 </section>
 
 
-<!-- Features -->
+<!-- ================= ABOUT ================= -->
+
+<section class="about-section" id="about">
+
+    <div class="about-container">
+
+        <div class="about-text">
+
+            <h2>About FarmchainX</h2>
+
+            <p>
+                FarmchainX is an AI and Blockchain powered agricultural
+                marketplace that directly connects farmers, consumers,
+                and transporters.
+            </p>
+
+            <p>
+                Our platform ensures transparent pricing, real-time
+                shipment tracking, and secure product traceability
+                from farm to consumer.
+            </p>
+
+        </div>
+
+
+        <div class="about-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1200&auto=format&fit=crop"
+                alt="Agricultural Farm"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="workflow-section" id="workflow">
+
+    <h2>How It Works</h2>
+
+    <div class="workflow-cards">
+
+
+        <!-- Farmer -->
+
+        <div class="workflow-card">
+
+            <div class="icon">🌱</div>
+
+            <h3>Farmer Uploads Crops</h3>
+
+            <p>
+                Farmers add crop details, quantity, and pricing
+                directly on the platform.
+            </p>
+
+        </div>
+
+
+        <!-- Consumer -->
+
+        <div class="workflow-card">
+
+            <div class="icon">🛒</div>
+
+            <h3>Consumers Buy Products</h3>
+
+            <p>
+                Consumers browse verified farm products
+                and place orders online.
+            </p>
+
+        </div>
+
+
+        <!-- Transporter -->
+
+        <div class="workflow-card">
+
+            <div class="icon">🚚</div>
+
+            <h3>Transporter Delivers</h3>
+
+            <p>
+                Assigned transporters update live shipment
+                tracking and delivery status.
+            </p>
+
+        </div>
+
+
+        <!-- Blockchain -->
+
+        <div class="workflow-card">
+
+            <div class="icon">🔗</div>
+
+            <h3>Blockchain Verification</h3>
+
+            <p>
+                Every product is securely traceable using
+                blockchain and QR verification.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
 
 <section class="features">
 
-<div class="feature-card">
-<h3>AI Price Prediction</h3>
-<p>Smart AI predicts fair crop prices for farmers.</p>
-<a href="ai.html">
-<button class="primary">Get Started</button>
-</a>
-</div>
 
-<div class="feature-card">
-<h3>Blockchain Traceability</h3>
-<p>Track every product from farm to consumer.</p>
-<a href="blockchain.html">
-<button class="primary">Get Started</button>
-</a>
-</div>
+    <!-- AI -->
 
-<div class="feature-card">
-<h3>QR Code Verification</h3>
-<p>Consumers scan QR codes to verify product origin.</p>
-<a href="qr.html">
-<button class="primary">Get Started</button>
-</a>
-</div>
+    <div class="feature-card">
 
-<div class="feature-card">
-<h3>Direct Farmer Selling</h3>
-<p>Farmers sell directly without middlemen.</p>
-<a href="directselling.html">
-<button class="primary">Get Started</button>
-</a>
-</div>
+        <h3>AI Price Prediction</h3>
+
+        <p>
+            Smart AI predicts fair crop prices for farmers.
+        </p>
+
+        <a href="pages/farmer/ai.html">
+            <button class="primary">
+                Get Started
+            </button>
+        </a>
+
+    </div>
+
+
+    <!-- Blockchain -->
+
+    <div class="feature-card">
+
+        <h3>Blockchain Traceability</h3>
+
+        <p>
+            Track every product from farm to consumer.
+        </p>
+
+        <a href="pages/blockchain/blockchain.html">
+            <button class="primary">
+                Get Started
+            </button>
+        </a>
+
+    </div>
+
+
+    <!-- QR -->
+
+    <div class="feature-card">
+
+        <h3>QR Code Verification</h3>
+
+        <p>
+            Consumers scan QR codes to verify product origin.
+        </p>
+
+        <a href="pages/blockchain/qr.html">
+            <button class="primary">
+                Get Started
+            </button>
+        </a>
+
+    </div>
+
+
+    <!-- Direct Selling -->
+
+    <div class="feature-card">
+
+        <h3>Direct Farmer Selling</h3>
+
+        <p>
+            Farmers sell directly without middlemen.
+        </p>
+
+        <a href="pages/consumer/directselling.html">
+            <button class="primary">
+                Get Started
+            </button>
+        </a>
+
+    </div>
 
 </section>
 
 
-<!-- Statistics -->
+<!-- ================= STATISTICS ================= -->
 
 <section class="stats">
 
-<div class="stat-box">
-<h2>10,000+</h2>
-<p>Registered Farmers</p>
-</div>
+    <div class="stat-box">
 
-<div class="stat-box">
-<h2>50M+</h2>
-<p>Traceable Transactions</p>
-</div>
+        <h2>10,000+</h2>
 
-<div class="stat-box">
-<h2>500+</h2>
-<p>Verified Consumers</p>
-</div>
+        <p>
+            Registered Farmers
+        </p>
+
+    </div>
+
+
+    <div class="stat-box">
+
+        <h2>50M+</h2>
+
+        <p>
+            Traceable Transactions
+        </p>
+
+    </div>
+
+
+    <div class="stat-box">
+
+        <h2>500+</h2>
+
+        <p>
+            Verified Consumers
+        </p>
+
+    </div>
 
 </section>
 
 
-<!-- Footer -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
-<p>© 2026 FarmchainX | All Rights Reserved</p>
+
+    <p>
+        © 2026 FarmchainX | All Rights Reserved
+    </p>
+
 </footer>
 
+
 </body>
+
 </html>

@@ -2,21 +2,146 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
-<title>QR Verification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="styles.css">
-<body>
-    <h1>QR Code Verification</h1>
+<title>FarmchainX - QR Verification</title>
 
-<input type="text" placeholder="Enter Product ID">
+<link rel="stylesheet" href="../../css/styles.css">
 
-<button>Verify</button>
-
-<h3>Product Verified ✔</h3>
-<p>Crop: Tomato</p>
-<p>Farmer: Ramesh</p>
-<p>Location: Indore</p>
-</body>
 </head>
 
+<body>
+
+<header>
+
+<nav class="navbar">
+
+<h2 class="logo">FarmchainX</h2>
+
+<ul class="nav-links">
+
+<li>
+<a href="../../index.html">Home</a>
+</li>
+
+<li>
+<a href="../consumer/consumer.html">Dashboard</a>
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+
+<section class="dashboard">
+
+<h1>QR Code Verification</h1>
+
+<p>
+Verify agricultural product information using its Product ID.
+</p>
+
+
+<div class="form-container">
+
+<input
+type="text"
+id="productId"
+placeholder="Enter Product ID"
+>
+
+<button
+class="primary-btn"
+onclick="verifyProduct()">
+
+Verify
+
+</button>
+
+</div>
+
+
+<div id="verificationResult"
+style="margin-top:30px;">
+
+</div>
+
+</section>
+
+
+<script>
+
+function verifyProduct() {
+
+    const productId =
+        document.getElementById("productId").value;
+
+    if (!productId) {
+
+        alert("Please enter Product ID");
+
+        return;
+    }
+
+
+    fetch(`http://localhost:8080/api/crops/${productId}`)
+
+    .then(res => {
+
+        if (!res.ok) {
+            throw new Error("Product not found");
+        }
+
+        return res.json();
+
+    })
+
+    .then(crop => {
+
+        document.getElementById("verificationResult").innerHTML = `
+
+            <h3>Product Verified ✔</h3>
+
+            <p>
+                <strong>Crop:</strong>
+                ${crop.cropName}
+            </p>
+
+            <p>
+                <strong>Quantity:</strong>
+                ${crop.quantity} Kg
+            </p>
+
+            <p>
+                <strong>Price:</strong>
+                ₹${crop.price}
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                ${crop.location}
+            </p>
+
+        `;
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById("verificationResult").innerHTML =
+            "<h3>Product Not Found ❌</h3>";
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,67 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FarmchainX Login</title>
-<link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmchainX Login</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
 </head>
+
 
 <body>
 
+
+<!-- ================= NAVBAR ================= -->
+
 <header>
-<nav class="navbar">
-<h2 class="logo">FarmchainX</h2>
 
-<ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="#">About</a></li>
-<li><a href="#">How it works</a></li>
-</ul>
+    <nav class="navbar">
 
-<div class="auth-buttons">
-<a href="login.html" class="btn login">Login</a>
-<a href="signup.html" class="btn register">Register</a>
-</div>
+        <h2 class="logo">FarmchainX</h2>
 
-</nav>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+
+            <li>
+                <a href="index.html#about">About</a>
+            </li>
+
+            <li>
+                <a href="index.html#workflow">How it works</a>
+            </li>
+
+        </ul>
+
+
+        <div class="auth-buttons">
+
+            <a href="login.html" class="btn login">
+                Login
+            </a>
+
+            <a href="signup.html" class="btn register">
+                Register
+            </a>
+
+        </div>
+
+    </nav>
+
 </header>
+
+
+
+<!-- ================= LOGIN FORM ================= -->
 
 <section class="form-section">
 
-<div class="form-container">
+    <div class="form-container">
 
-<h2>Login to FarmchainX</h2>
+        <h2>Login to FarmchainX</h2>
 
-<form onsubmit="loginRedirect(event)">
 
-<label>Email</label>
-<input type="email" placeholder="Enter email" required>
+        <form onsubmit="loginRedirect(event)">
 
-<label>Password</label>
-<input type="password" placeholder="Enter password" required>
 
-<label>Select Role</label>
+            <!-- Email -->
 
-<select id="role">
-<option value="farmer">🌱 Farmer</option>
-<option value="consumer">🛒 Consumer</option>
-<option value="transporter">🚚 Transporter</option>
-</select>
+            <label>Email</label>
 
-<button type="submit" class="primary-btn">Login</button>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                required
+            >
 
-<p class="forgot">Forgot Password?</p>
 
-<p>Don't have an account? <a href="signup.html">Register Now</a></p>
+            <!-- Password -->
 
-</form>
+            <label>Password</label>
 
-</div>
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                required
+            >
+
+
+            <!-- Role -->
+
+            <label>Select Role</label>
+
+            <select id="role" required>
+
+                <option value="farmer">
+                    🌱 Farmer
+                </option>
+
+                <option value="consumer">
+                    🛒 Consumer
+                </option>
+
+                <option value="transporter">
+                    🚚 Transporter
+                </option>
+
+                <option value="admin">
+                    🛠️ Admin
+                </option>
+
+            </select>
+
+
+            <!-- Login Button -->
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                Login
+            </button>
+
+
+            <p class="forgot">
+                Forgot Password?
+            </p>
+
+
+            <p>
+                Don't have an account?
+                <a href="signup.html">
+                    Register Now
+                </a>
+            </p>
+
+
+        </form>
+
+    </div>
 
 </section>
+
+
+
+<!-- Authentication JavaScript -->
 
 <script src="js/auth.js"></script>
 
 </body>
+
 </html>

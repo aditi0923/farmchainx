@@ -2,93 +2,396 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<title>Admin Dashboard</title>
 
-<link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FarmchainX - Admin Dashboard</title>
+
+<link rel="stylesheet" href="../../css/styles.css">
+
+<style>
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 230px;
+    background: #1b5e20;
+    color: white;
+    padding: 25px;
+}
+
+.admin-sidebar h2 {
+    margin-bottom: 30px;
+}
+
+.admin-sidebar button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 35px;
+    background: #f5f7f5;
+}
+
+.admin-cards {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
+    gap: 20px;
+
+    margin: 30px 0;
+}
+
+.admin-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.admin-card h3 {
+    margin-bottom: 10px;
+}
+
+.admin-card p {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.admin-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 25px;
+}
+
+.admin-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-section th,
+.admin-section td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+</style>
 
 </head>
 
+
 <body>
 
-<div class="sidebar">
 
-<h2>FarmChainX Admin</h2>
+<div class="admin-layout">
 
-<a href="#">Dashboard</a>
-<a href="#">Manage Farmers</a>
-<a href="#">Manage Consumers</a>
-<a href="#">Manage Transporters</a>
-<a href="#">Crop Listings</a>
-<a href="#">Orders</a>
-<a href="#">Reports</a>
-<a href="#">Logout</a>
+
+<!-- SIDEBAR -->
+
+<div class="admin-sidebar">
+
+<h2>FarmchainX</h2>
+
+<p>Admin Panel</p>
+
+
+<button onclick="showSection('dashboard')">
+🏠 Dashboard
+</button>
+
+<button onclick="showSection('users')">
+👥 Users
+</button>
+
+<button onclick="showSection('products')">
+🌾 Products
+</button>
+
+<button onclick="showSection('orders')">
+📦 Orders
+</button>
+
+<button onclick="showSection('transporters')">
+🚚 Transporters
+</button>
+
+<button onclick="logout()">
+🚪 Logout
+</button>
 
 </div>
 
-<div class="main">
+
+<!-- CONTENT -->
+
+<div class="admin-content">
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="admin-section">
 
 <h1>Admin Dashboard</h1>
 
-<div class="cards">
+<div class="admin-cards">
 
-<div class="card">
-<h3>Total Farmers</h3>
-<p id="farmers">120</p>
-</div>
+<div class="admin-card">
 
-<div class="card">
-<h3>Total Consumers</h3>
-<p id="consumers">85</p>
-</div>
+<h3>Farmers</h3>
 
-<div class="card">
-<h3>Total Orders</h3>
-<p id="orders">340</p>
-</div>
-
-<div class="card">
-<h3>Active Shipments</h3>
-<p id="shipments">56</p>
-</div>
+<p id="farmerCount">0</p>
 
 </div>
 
-<h2>Recent Orders</h2>
+
+<div class="admin-card">
+
+<h3>Consumers</h3>
+
+<p id="consumerCount">0</p>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>Products</h3>
+
+<p id="productCount">0</p>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>Orders</h3>
+
+<p id="orderCount">0</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- USERS -->
+
+<section id="users"
+class="admin-section"
+style="display:none;">
+
+<h2>Users</h2>
 
 <table>
 
-<tr>
-<th>Order ID</th>
-<th>Crop</th>
-<th>Farmer</th>
-<th>Consumer</th>
-<th>Status</th>
-</tr>
+<thead>
 
 <tr>
-<td>FCX101</td>
-<td>Tomatoes</td>
-<td>Rahul</td>
-<td>Sneha</td>
-<td id="status1">Pending</td>
+
+<th>Email</th>
+<th>Role</th>
+
 </tr>
 
+</thead>
+
+<tbody id="usersTable">
+
 <tr>
-<td>FCX102</td>
-<td>Wheat</td>
-<td>Vishnu</td>
-<td>Ananya</td>
-<td id="status2">Shipped</td>
+
+<td colspan="2">
+No user data available
+</td>
+
 </tr>
+
+</tbody>
 
 </table>
 
-<button onclick="refreshData()">Refresh Data</button>
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section id="products"
+class="admin-section"
+style="display:none;">
+
+<h2>Products</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Product</th>
+<th>Quantity</th>
+<th>Price</th>
+<th>Location</th>
+
+</tr>
+
+</thead>
+
+<tbody id="productsTable">
+
+<tr>
+
+<td colspan="5">
+Loading...
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+
+<!-- ORDERS -->
+
+<section id="orders"
+class="admin-section"
+style="display:none;">
+
+<h2>Orders</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Consumer</th>
+<th>Quantity</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ordersTable">
+
+<tr>
+
+<td colspan="4">
+Loading...
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+
+<!-- TRANSPORTERS -->
+
+<section id="transporters"
+class="admin-section"
+style="display:none;">
+
+<h2>Transporters</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Email</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+Transporter information
+</td>
+
+<td>
+Available
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
 
 </div>
 
-<script src="js/admin.js"></script>
+</div>
+
+
+<script src="../../js/admin.js"></script>
+
+<script>
+
+function showSection(id) {
+
+    document.querySelectorAll(".admin-section")
+    .forEach(section => {
+
+        section.style.display = "none";
+
+    });
+
+    document.getElementById(id)
+    .style.display = "block";
+
+}
+
+
+function logout() {
+
+    localStorage.clear();
+
+    window.location.href =
+        "../../login.html";
+
+}
+
+
+showSection("dashboard");
+
+</script>
+
 
 </body>
+
 </html>

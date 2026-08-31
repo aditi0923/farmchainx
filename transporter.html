@@ -125,13 +125,38 @@ border-radius:5px;
 <!-- SIDEBAR -->
 <div class="sidebar">
     <h2>🚚 Transporter</h2>
-    <a href="#">Dashboard</a>
-    <a href="#">Orders</a>
-    <a href="#">Tracking</a>
+    <a href="#" onclick="showSection('dashboard')">
+🏠 Dashboard
+</a>
+
+<a href="#" onclick="showSection('orders')">
+📦 Assigned Orders
+</a>
+
+<a href="#" onclick="showSection('tracking')">
+📍 Live Tracking
+</a>
+
+<a href="#" onclick="showSection('history')">
+✅ Delivery History
+</a>
+
+<a href="#" onclick="showSection('earnings')">
+💰 Earnings
+</a>
+
+<a href="#" onclick="showSection('profile')">
+👤 Profile
+</a>
+     <a href="#" onclick="logout()">
+        Logout
+    </a>
 </div>
 
 <!-- MAIN -->
 <div class="main">
+
+    <div id="dashboardSection" class="section">
 
 <h1>Assigned Shipments</h1>
 
@@ -160,12 +185,104 @@ border-radius:5px;
 </table>
 
 </div>
-<script src="js/script.js"></script>
+
+<!-- ORDERS SECTION -->
+<div id="ordersSection" class="section" style="display:none;">
+
+<h1>Assigned Orders</h1>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Qty</th>
+<th>Farmer</th>
+<th>Consumer</th>
+<th>Status</th>
+<th>Update</th>
+<th>Track</th>
+</tr>
+</thead>
+
+<tbody id="ordersTable"></tbody>
+</table>
+
+</div>
+
+<!-- TRACKING SECTION -->
+<!-- TRACKING SECTION -->
+<div id="trackingSection" class="section" style="display:none;">
+
+<h1>Live Tracking</h1>
+
+<table>
+<thead>
+<tr>
+    <th>Order ID</th>
+    <th>Consumer</th>
+    <th>Status</th>
+    <th>Track</th>
+</tr>
+</thead>
+
+<tbody id="trackingTable"></tbody>
+
+</table>
+
+</div>
+
+<!-- HISTORY SECTION -->
+<!-- HISTORY SECTION -->
+<div id="historySection" class="section" style="display:none;">
+
+<h1>Delivery History</h1>
+
+<table>
+<thead>
+<tr>
+    <th>Order ID</th>
+    <th>Consumer</th>
+    <th>Quantity</th>
+    <th>Status</th>
+</tr>
+</thead>
+
+<tbody id="historyBody"></tbody>
+
+</table>
+
+</div>
+
+<!-- EARNINGS SECTION -->
+<div id="earningsSection" class="section" style="display:none;">
+<h1>Earnings</h1>
+
+<div class="cards">
+<div>Total Earnings: ₹15,000</div>
+<div>This Month: ₹4,200</div>
+</div>
+</div>
+
+<!-- PROFILE SECTION -->
+<div id="profileSection" class="section" style="display:none;">
+<h1>Profile</h1>
+
+<div class="cards">
+<div>Email: <span id="profileEmail"></span></div>
+</div>
+</div>
+
+</div>
+<script src="../../js/script.js"></script>
 
 <script>
 
 // ✅ GET EMAIL
 let email = localStorage.getItem("email");
+
+document.getElementById("profileEmail")
+.innerText = email;
+
 if(!email){
     email = "ramesh@gmail.com"; // fallback
 }
@@ -180,9 +297,22 @@ function loadOrders(){
     })
     .then(data => {
 
-        let table = document.getElementById("orderTable");
-        table.innerHTML = "";
+       let dashboardTable =
+document.getElementById("orderTable");
 
+let ordersTable =
+document.getElementById("ordersTable");
+
+let trackingTable =
+document.getElementById("trackingTable");
+
+let historyBody =
+document.getElementById("historyBody");
+
+dashboardTable.innerHTML = "";
+ordersTable.innerHTML = "";
+trackingTable.innerHTML = "";
+historyBody.innerHTML = "";
         data.forEach(order => {
 
             let color = "black";
@@ -191,37 +321,74 @@ function loadOrders(){
             if(order.status === "In Transit") color = "purple";
             if(order.status === "Delivered") color = "green";
 
-            table.innerHTML += `
-            <tr>
-                <td>${order.id}</td>
-                <td>${order.quantity}</td>
-                <td>${order.farmerEmail}</td>
-                <td>${order.consumerEmail}</td>
+            let row = `
+<tr>
+    <td>${order.id}</td>
+    <td>${order.quantity}</td>
+    <td>${order.farmerEmail}</td>
+    <td>${order.consumerEmail}</td>
 
-                <td style="
+    <td style="
 color:${order.status === 'Delivered' ? 'green' :
         order.status === 'In Transit' ? 'purple' :
         order.status === 'Assigned' ? 'blue' : 'orange'}">
     ${order.status}
-</td>
+    </td>
 
-                <td>
-                    <select onchange="updateStatus(${order.id}, this.value)">
-                        <option>Pending</option>
-                        <option>Assigned</option>
-                        <option>In Transit</option>
-                        <option>Delivered</option>
-                    </select>
-                </td>
+    <td>
+        <select onchange="updateStatus(${order.id}, this.value)">
+            <option ${order.status==="Pending"?"selected":""}>Pending</option>
+            <option ${order.status==="Assigned"?"selected":""}>Assigned</option>
+            <option ${order.status==="In Transit"?"selected":""}>In Transit</option>
+            <option ${order.status==="Delivered"?"selected":""}>Delivered</option>
+        </select>
+    </td>
 
-                <td>
-                    <button onclick="goToTracking(${order.id})">
-                        Track
-                    </button>
-                </td>
-            </tr>`;
-        });
+    <td>
+        <button onclick="goToTracking(${order.id})">
+            Track
+        </button>
+    </td>
+</tr>`;
 
+dashboardTable.innerHTML += row;
+ordersTable.innerHTML += row;
+trackingTable.innerHTML += `
+<tr>
+    <td>${order.id}</td>
+    <td>${order.consumerEmail}</td>
+
+    <td style="
+    color:${order.status === 'Delivered' ? 'green' :
+            order.status === 'In Transit' ? 'purple' :
+            order.status === 'Assigned' ? 'blue' : 'orange'}">
+
+        ${order.status}
+
+    </td>
+
+    <td>
+        <button onclick="goToTracking(${order.id})">
+            Live Track
+        </button>
+    </td>
+</tr>
+`;
+        if(order.status === "Delivered"){
+
+    historyBody.innerHTML += `
+    <tr>
+        <td>${order.id}</td>
+        <td>${order.consumerEmail}</td>
+        <td>${order.quantity}</td>
+
+        <td style="color:green;">
+            Delivered
+        </td>
+    </tr>
+    `;
+}
+ });
         // ✅ Stats
         document.getElementById("total").innerText = data.length;
         document.getElementById("transit").innerText =
@@ -235,11 +402,72 @@ color:${order.status === 'Delivered' ? 'green' :
     });
 }
 
+function showSection(section){
+
+    document.querySelectorAll(".section")
+    .forEach(sec => {
+        sec.style.display = "none";
+    });
+
+    document.getElementById(section + "Section")
+    .style.display = "block";
+}
+
 // AUTO REFRESH
 setInterval(loadOrders, 5000);
 
 // INITIAL LOAD
 loadOrders();
+
+function updateStatus(id, status){
+
+    fetch(`http://localhost:8080/api/orders/${id}/status`,{
+
+        method:"PUT",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            status: status
+        })
+
+    })
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        alert("Status Updated ✅");
+
+        loadOrders();
+
+    })
+
+    .catch(err => {
+
+        console.error(err);
+
+        alert("Status update failed ❌");
+
+    });
+}
+
+function goToTracking(id){
+
+    window.location.href =
+    `tracking.html?id=${id}`;
+} 
+
+function logout(){
+
+    localStorage.removeItem("email");
+
+    alert("Logged out successfully ✅");
+
+    window.location.href = "../../login.html";
+}
 
 </script>
 

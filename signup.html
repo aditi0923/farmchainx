@@ -1,71 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FarmchainX Signup</title>
-<link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmchainX Signup</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
 </head>
+
 
 <body>
 
+
+<!-- ================= NAVBAR ================= -->
+
 <header>
-<nav class="navbar">
 
-<h2 class="logo">FarmchainX</h2>
+    <nav class="navbar">
 
-<ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="#">About</a></li>
-<li><a href="#">How it works</a></li>
-</ul>
+        <h2 class="logo">
+            FarmchainX
+        </h2>
 
-<div class="auth-buttons">
-<a href="login.html" class="btn login">Login</a>
-<a href="signup.html" class="btn register">Register</a>
-</div>
 
-</nav>
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#about">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#workflow">
+                    How it works
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="auth-buttons">
+
+            <a href="login.html" class="btn login">
+                Login
+            </a>
+
+            <a href="signup.html" class="btn register">
+                Register
+            </a>
+
+        </div>
+
+    </nav>
+
 </header>
+
+
+
+<!-- ================= SIGNUP FORM ================= -->
 
 <section class="form-section">
 
-<div class="form-container">
+    <div class="form-container">
 
-<h2>Signup for FarmchainX</h2>
+        <h2>Signup for FarmchainX</h2>
 
-<form onsubmit="redirectDashboard(event)">
 
-<label>Full Name</label>
-<input type="text" placeholder="Enter full name" required>
+        <form onsubmit="redirectDashboard(event)">
 
-<label>Email</label>
-<input type="email" placeholder="Enter email" required>
 
-<label>Password</label>
-<input type="password" placeholder="Create password" required>
+            <!-- Full Name -->
 
-<label>Confirm Password</label>
-<input type="password" placeholder="Confirm password" required>
+            <label>Full Name</label>
 
-<label>Select Role</label>
+            <input
+                type="text"
+                id="fullname"
+                placeholder="Enter full name"
+                required
+            >
 
-<select id="role">
-<option value="farmer">🌱 Farmer</option>
-<option value="consumer">🛒 Consumer</option>
-<option value="transporter">🚚 Transporter</option>
-</select>
 
-<button type="submit" class="primary-btn">Signup</button>
+            <!-- Email -->
 
-<p>Already have an account? <a href="login.html">Login</a></p>
+            <label>Email</label>
 
-</form>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                required
+            >
 
-</div>
+
+            <!-- Password -->
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Create password"
+                required
+            >
+
+
+            <!-- Confirm Password -->
+
+            <label>Confirm Password</label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm password"
+                required
+            >
+
+
+            <!-- Role -->
+
+            <label>Select Role</label>
+
+            <select id="role" required>
+
+                <option value="farmer">
+                    🌱 Farmer
+                </option>
+
+                <option value="consumer">
+                    🛒 Consumer
+                </option>
+
+                <option value="transporter">
+                    🚚 Transporter
+                </option>
+
+                <option value="admin">
+                    🛠️ Admin
+                </option>
+
+            </select>
+
+
+            <!-- Signup Button -->
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                Signup
+            </button>
+
+
+            <p>
+                Already have an account?
+                <a href="login.html">
+                    Login
+                </a>
+            </p>
+
+
+        </form>
+
+    </div>
 
 </section>
 
+
+
+<!-- Authentication JavaScript -->
+
 <script src="js/auth.js"></script>
+
 </body>
+
 </html>

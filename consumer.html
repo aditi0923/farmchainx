@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FarmchainX Consumer Dashboard</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../css/styles.css">
 </head>
 
 <body>
@@ -15,13 +15,13 @@
 <h2 class="logo">FarmchainX</h2>
 
 <ul class="nav-links">
-<li><a href="index.html">Home</a></li>
+<li><a href="../../index.html">Home</a></li>
 <li><a href="#">Products</a></li>
 <li><a href="#">My Orders</a></li>
 </ul>
 
 <div class="auth-buttons">
-<a href="index.html" class="btn login">Logout</a>
+<a href="#" onclick="logout()" class="btn login">Logout</a>
 </div>
 
 </nav>
@@ -63,6 +63,8 @@
 <th>Product</th>
 <th>Price</th>
 <th>Action</th>
+<th>Farmer</th>
+<th>Location</th>
 </tr>
 </thead>
 
@@ -79,7 +81,7 @@
 let email = localStorage.getItem("email");
 
 if(!email){
-    window.location.href = "login.html";
+    window.location.href = "../../login.html";
 }
 
 // LOAD PRODUCTS
@@ -104,9 +106,14 @@ function loadProducts() {
                 <td>${crop.cropName}</td>
                 <td>₹${crop.price}</td>
                 <td>
-                    <button onclick="buyProduct(${crop.id})"> Buy
-                    </button>
+                
+                
+                   <button onclick="buyProduct(${crop.id}, ${crop.price})">
+                   Buy
+                </button>
                 </td>
+                <td>${crop.userEmail}</td>
+                <td>${crop.location}</td>
             </tr>
             `;
         });
@@ -117,36 +124,37 @@ function loadProducts() {
     });
 }
 
-function buyProduct(id){
+function buyProduct(id, price){
 
     let quantity = prompt("Enter quantity:");
 
     if(!quantity) return;
-    
-    alert(`
-    Payment Successful 💳
-    Order placed!
-    Product ID: ${id}
-    Quantity: ${quantity}
-     `);
-    fetch("http://localhost:8080/api/orders", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            cropId: id,
-            quantity: quantity,
-            consumerEmail: localStorage.getItem("email")
-        })
-    })
-    .then(res => res.json())
-    .then(() => {
-        alert("Order placed successfully ✅");
-    })
-    .catch(() => {
-        alert("Error placing order ❌");
-    });
+
+    let total = quantity * price;
+
+    // CREATE ORDER OBJECT
+    const order = {
+
+        cropId: id,
+        quantity: quantity,
+        consumerEmail: localStorage.getItem("email")
+
+    };
+
+    // SAVE TEMPORARILY
+    localStorage.setItem(
+        "pendingOrder",
+        JSON.stringify(order)
+    );
+
+    // GO TO PAYMENT PAGE
+    window.location.href =
+    `payment.html?amount=${total}`;
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "../../login.html";
 }
 
 // INIT
